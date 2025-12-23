@@ -7,6 +7,7 @@ const sequelizeConn = new Sequelize("flowlist", "root", "2038Alaska!", {
     timestamps: false,
   },
 });
+export default sequelizeConn;
 
 //await attemptConnection();
 

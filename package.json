@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "Web app to manage habits and tasks",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.2.1",
     "mysql2": "^3.16.0",
     "sequelize": "^6.37.7"
