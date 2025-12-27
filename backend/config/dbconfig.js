@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 
+//THIS FILE ESTABLISH A CONNECTION TO THE DBMS
 const sequelizeConn = new Sequelize("flowlist", "root", "2038Alaska!", {
   host: "localhost",
   dialect: "mysql",
@@ -8,15 +9,5 @@ const sequelizeConn = new Sequelize("flowlist", "root", "2038Alaska!", {
   },
   logging: false,
 });
+
 export default sequelizeConn;
-
-//await attemptConnection();
-
-async function attemptConnection() {
-  try {
-    await sequelizeConn.authenticate();
-    console.log("successfully connected to database!");
-  } catch (error) {
-    console.log("Error connecting to DBMS : ", error.message);
-  }
-}
