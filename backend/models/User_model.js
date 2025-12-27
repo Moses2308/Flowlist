@@ -4,13 +4,27 @@ import bcrypt from "bcrypt";
 import List from "./List_model.js";
 import ListItem from "./ListItem_model.js";
 
-class User extends Model {}
+class User extends Model {
+  //helper functions to verify, update, and set passwords
+  async verifyPassword(rawPassword) {
+    const result = await bcrypt.compare(rawPassword, this.password_hash);
+    return result;
+  }
+  async updatePassword(rawPassword, newPassword) {
+    if (await this.verifyPassword(rawPassword)) {
+      this.password_hash = await bcrypt.hash(rawPassword, 13);
+    }
+  }
+  async setPasswordHash(rawPassword) {
+    this.password_hash = await bcrypt.hash(rawPassword, 13);
+  }
+}
 User.init(
   {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
-      default: DataTypes.UUIDV4,
+      defaultValue: DataTypes.UUIDV4,
       allowNull: false,
     },
     email: {
@@ -27,7 +41,6 @@ User.init(
     sequelize: sequelizeConn,
     timestamps: false,
     modelName: "User",
-    //removed Hook to implement in next commit
   }
 );
 
@@ -36,13 +49,7 @@ resetDatabase();
 
 export default User;
 
-//Todo: Complete the hook to salt user password on password creation
-async function beforeValidate(user, options) {
-  if (!user.password_hash) {
-    user.password_hash = await bcrypt.hash(user.plain_password, 13);
-  }
-}
-
+// --- FUNCTION DEFINITIONS ---
 async function resetDatabase() {
   //attempting to drop all tables
   try {

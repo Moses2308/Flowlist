@@ -6,6 +6,7 @@ const sequelizeConn = new Sequelize("flowlist", "root", "2038Alaska!", {
   default: {
     timestamps: false,
   },
+  logging: false,
 });
 export default sequelizeConn;
 
