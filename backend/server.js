@@ -8,7 +8,7 @@ const app = express();
 app.use(express.urlencoded());
 //for x-www-form-urlencoded data on every route
 
-//TODO: CREATE A ROUTE FOR CREATING A USER
+//A ROUTE FOR CREATING A USER
 app.post("/api/v1/users", async (req, res) => {
   //destructuring newPassword & email from request body.
   let newPassword;
@@ -39,13 +39,26 @@ app.post("/api/v1/users", async (req, res) => {
   }
 });
 
-//TODO: CREATE A ROUTE FOR GETTING ALL USERS
+//A ROUTE FOR GETTING ALL USERS
 app.get("/api/v1/users", async (req, res) => {
   const allUsers = await User.findAll();
   res.status(200).json({ users: allUsers });
 });
-
-//TODO: CREATE A ROUTE FOR GETTING A SPECIFIC USER
+//A ROUTE FOR GETTING A SPECIFIC USER BY ID
+app.get("/api/v1/users/:id", async (req, res) => {
+  const targetID = req.params.id;
+  const targetUser = await User.findOne({
+    where: {
+      id: targetID,
+    },
+  });
+  if (!targetUser) {
+    res.status(404).json({ error: `could not find user with ID ${targetID}` });
+    return;
+  }
+  res.status(200).json({ user: targetUser });
+  return;
+});
 //TODO: CREATE A ROUTE FOR UPDATING A USER
 //TODO: CREATE A ROUTE FOR DELETING A USER
 
