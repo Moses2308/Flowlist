@@ -39,9 +39,13 @@ app.post("/api/v1/users", async (req, res) => {
   }
 });
 
-//TODO: CREATE A ROUTE FOR GETTING A SPECIFIC USER
+//TODO: CREATE A ROUTE FOR GETTING ALL USERS
+app.get("/api/v1/users", async (req, res) => {
+  const allUsers = await User.findAll();
+  res.status(200).json({ users: allUsers });
+});
 
-app.get("/api/v1/users");
+//TODO: CREATE A ROUTE FOR GETTING A SPECIFIC USER
 //TODO: CREATE A ROUTE FOR UPDATING A USER
 //TODO: CREATE A ROUTE FOR DELETING A USER
 
