@@ -8,11 +8,6 @@ class User extends Model {
     const result = await bcrypt.compare(rawPassword, this.password_hash);
     return result;
   }
-  async updatePassword(rawPassword, newPassword) {
-    if (await this.verifyPassword(rawPassword)) {
-      this.password_hash = await bcrypt.hash(rawPassword, 13);
-    }
-  }
   async setPasswordHash(rawPassword) {
     this.password_hash = await bcrypt.hash(rawPassword, 13);
   }
