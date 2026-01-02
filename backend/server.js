@@ -60,7 +60,7 @@ app.get("/api/v1/users/:id", async (req, res) => {
   res.status(200).json({ user: targetUser });
   return;
 });
-//TODO: CREATE A ROUTE FOR UPDATING A USER
+//A ROUTE FOR UPDATING A USER
 app.patch("/api/v1/users/:id", async (req, res) => {
   const targetID = req.params.id;
   const { newEmail, newPassword, oldPassword } = req.body;
@@ -109,7 +109,49 @@ app.patch("/api/v1/users/:id", async (req, res) => {
   res.send("You should not be seeing this response!");
 });
 
-//TODO: CREATE A ROUTE FOR DELETING A USER
+//A ROUTE FOR DELETING A USER
+app.delete("/api/v1/users/:id", async (req, res) => {
+  try {
+    //checking if required request info is available
+    if (!req.body || !req.body.password) {
+      throw new Error("This request requires a password");
+    } else if (!req.params) {
+      throw new Error("Resource ID required");
+    }
+
+    //getting the required info from the request
+    const { password } = req.body;
+    const targetID = req.params.id;
+
+    //attempt to get the resource with the specified id
+    const targetUser = await User.findOne({ where: { id: targetID } });
+    if (!targetUser) {
+      throw new Error(`User with id ${targetID} not found`);
+    }
+
+    //variable for more readable comparisons
+    const isCorrectPassword = await bcrypt.compare(
+      password,
+      targetUser.password_hash
+    );
+
+    //error handling for incorrect password, and action action for a correct password.
+    if (!isCorrectPassword) {
+      throw new Error(`Incorrect password`);
+    }
+    if (isCorrectPassword) {
+      await targetUser.destroy();
+      res.status(200).json({ status: `User ${targetID} successfully deleted` });
+      return;
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+    return;
+  }
+
+  res.send("You should not be seeing this response!");
+});
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
