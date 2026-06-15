@@ -2,8 +2,8 @@ import sequelizeConn from "./config/dbConnection.js";
 import { Model, DataTypes, UUIDV4 } from "sequelize";
 import bcrypt from "bcrypt";
 
-class User extends Model {}
-User.init(
+class Users extends Model {}
+Users.init(
   {
     id: {
       primaryKey: true,
@@ -28,6 +28,7 @@ User.init(
   },
   {
     sequelize: sequelizeConn,
+    tableName: "users",
     hooks: {
       beforeValidate: async (user, options) => {
         user.password_hash = await bcrypt.hash(user.raw_password, 15);
@@ -37,8 +38,8 @@ User.init(
   },
 );
 
-class List extends Model {}
-List.init(
+class Lists extends Model {}
+Lists.init(
   {
     id: {
       primaryKey: true,
@@ -55,6 +56,7 @@ List.init(
   },
   {
     sequelize: sequelizeConn,
+    tableName: "lists",
   },
 );
 
@@ -78,5 +80,6 @@ ListItems.init(
   },
   {
     sequelize: sequelizeConn,
+    tableName: "list_items",
   },
 );
