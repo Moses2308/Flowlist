@@ -1,8 +1,8 @@
 import sequelizeConn from "./config/dbConnection.js";
-import { Model, DataTypes, UUIDV4 } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import bcrypt from "bcrypt";
 
-class Users extends Model {}
+export class Users extends Model {}
 Users.init(
   {
     id: {
@@ -38,13 +38,13 @@ Users.init(
   },
 );
 
-class Lists extends Model {}
+export class Lists extends Model {}
 Lists.init(
   {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
-      defaultValue: UUIDV4,
+      defaultValue: DataTypes.UUIDV4,
     },
     title: {
       type: DataTypes.STRING(255),
@@ -60,13 +60,13 @@ Lists.init(
   },
 );
 
-class ListItems extends Model {}
+export class ListItems extends Model {}
 ListItems.init(
   {
     id: {
       primaryKey: true,
       type: DataTypes.UUID,
-      defaultValue: UUIDV4,
+      defaultValue: DataTypes.UUIDV4,
     },
     title: {
       type: DataTypes.STRING(255),
