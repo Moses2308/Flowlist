@@ -1,4 +1,7 @@
-import { Users, Lists, ListItems } from "../models.js";
+import Users from "../models/UsersModel.js";
+import Lists from "../models/ListsModel.js";
+import ListItems from "../models/ListItemsModel.js";
+
 import { DataTypes } from "sequelize";
 
 export default function defineAssociations() {
