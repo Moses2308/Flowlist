@@ -1,0 +1,22 @@
+{
+  "name": "Flowlist_backend",
+  "version": "1.0.0",
+  "main": "models.js",
+  "scripts": {},
+  "keywords": [
+    "API",
+    "JSON",
+    "RESTful",
+    "Sequelize",
+    "Express"
+  ],
+  "author": "Moses Ventura",
+  "license": "ISC",
+  "description": "Backend logic for Flowlist which primarly serves to save data to a database",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "mysql2": "^3.22.5",
+    "sequelize": "^6.37.8"
+  }
+}
