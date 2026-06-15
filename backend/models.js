@@ -1,5 +1,5 @@
 import sequelizeConn from "./config/dbConnection.js";
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, UUIDV4 } from "sequelize";
 import bcrypt from "bcrypt";
 
 class User extends Model {}
@@ -34,5 +34,49 @@ User.init(
         user.raw_password = null;
       },
     },
+  },
+);
+
+class List extends Model {}
+List.init(
+  {
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4,
+    },
+    title: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    isChecklist: {
+      type: DataTypes.BOOLEAN,
+    },
+  },
+  {
+    sequelize: sequelizeConn,
+  },
+);
+
+class ListItems extends Model {}
+ListItems.init(
+  {
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4,
+    },
+    title: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    isChecked: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  },
+  {
+    sequelize: sequelizeConn,
   },
 );
