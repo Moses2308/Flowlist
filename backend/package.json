@@ -2,6 +2,7 @@
   "name": "Flowlist_backend",
   "version": "1.0.0",
   "main": "models.js",
+  "type": "module",
   "scripts": {},
   "keywords": [
     "API",
