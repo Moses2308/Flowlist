@@ -18,10 +18,10 @@ export default function defineUsers(sequelizeConn) {
           isEmail: true,
         },
       },
-      raw_password: {
+      rawPassword: {
         type: DataTypes.VIRTUAL,
       },
-      password_hash: {
+      passwordHash: {
         allowNull: false,
         type: DataTypes.STRING(60), //front end validation
       },
