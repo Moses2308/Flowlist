@@ -31,8 +31,8 @@ export default function defineUsers(sequelizeConn) {
       tableName: "users",
       hooks: {
         beforeValidate: async (user, options) => {
-          user.password_hash = await bcrypt.hash(user.raw_password, 15);
-          user.raw_password = null;
+          user.passwordHash = await bcrypt.hash(user.rawPassword, 15);
+          user.rawPassword = null;
         },
       },
     },
