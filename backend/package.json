@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "models.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "createDB": "node --env-file=.env utils/createDatabase.js"
+  },
   "keywords": [
     "API",
     "JSON",
