@@ -1,10 +1,8 @@
-import Users from "../models/UsersModel.js";
-import Lists from "../models/ListsModel.js";
-import ListItems from "../models/ListItemsModel.js";
-
 import { DataTypes } from "sequelize";
 
-export default function defineAssociations() {
+export default function defineAssociations(sequelizeConn) {
+  const { Users, Lists, ListItems } = sequelizeConn.models;
+
   //USERS ASSOCIATIONS
   Users.hasMany(Lists, {
     foreignKey: {
