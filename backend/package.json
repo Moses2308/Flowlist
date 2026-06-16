@@ -4,7 +4,8 @@
   "main": "models.js",
   "type": "module",
   "scripts": {
-    "createDB": "node --env-file=.env utils/createDatabase.js"
+    "createDB": "node --env-file=.env utils/createDatabase.js",
+    "dev": "node --watch --env-file=.env server.js"
   },
   "keywords": [
     "API",
