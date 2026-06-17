@@ -34,12 +34,27 @@ app.post("/api/v1/users", async (req, res) => {
   });
 });
 
-app.get("/api/v1/users", (req, res) => {
-  res.send(`IMPLEMENT: route to get "all" users with pagination.`);
+app.get("/api/v1/users", async (req, res) => {
+  const users = await Users.findAll();
+  const sanitizedUsers = users.map((user) => {
+    delete user.dataValues.passwordHash;
+    return user;
+  });
+
+  res.status(200).json({
+    users: sanitizedUsers,
+  });
 });
 
-app.get("/api/v1/users/:userId", (req, res) => {
-  res.send(`IMPLEMENT: route to get a specific user`);
+app.get("/api/v1/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+
+  const targetUser = await Users.findByPk(userId);
+  delete targetUser.dataValues.passwordHash;
+
+  res.status(200).json({
+    user: targetUser,
+  });
 });
 
 app.patch("/api/v1/users/:userId", (req, res) => {
