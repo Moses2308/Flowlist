@@ -1,5 +1,6 @@
 import express from "express";
 import sequelizeConn from "./config/dbConnection.js";
+
 const PORT = process.env.PORT;
 
 const { Users, Lists, ListItems } = sequelizeConn.models;
@@ -76,8 +77,22 @@ app.patch("/api/v1/users/:userId", async (req, res) => {
   });
 });
 
-app.delete("/api/v1/users/:userId", (req, res) => {
-  res.send(`IMPLEMENT: route to delete a user`);
+app.delete("/api/v1/users/:userId", async (req, res) => {
+  const { password } = req.body.fields;
+  const { userId } = req.params;
+
+  const targetUser = await Users.findByPk(userId);
+
+  if (!(await targetUser.verifyPassword(password))) {
+    throw new Error("password does not match");
+  }
+
+  await targetUser.destroy();
+
+  res.status(200).json({
+    user: null,
+    status: "hardDeleted",
+  });
 });
 
 //catch all error handler

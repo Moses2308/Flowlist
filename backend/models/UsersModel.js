@@ -37,6 +37,10 @@ export default function defineUsers(sequelizeConn) {
       delete this.dataValues.rawPassword;
       return this;
     }
+
+    async verifyPassword(rawPassword) {
+      return await bcrypt.compare(rawPassword, this.passwordHash);
+    }
   }
 
   Users.init(
