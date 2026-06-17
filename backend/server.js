@@ -57,9 +57,25 @@ app.get("/api/v1/users/:userId", async (req, res) => {
   });
 });
 
-app.patch("/api/v1/users/:userId", (req, res) => {
-  res.send(`IMPLEMENT: route to update a user's fields`);
+app.patch("/api/v1/users/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const { fields } = req.body;
+
+  const targetUser = await Users.findByPk(userId);
+
+  targetUser.patchFields(fields);
+
+  await targetUser.save();
+
+  delete targetUser.dataValues.passwordHash;
+  delete targetUser.dataValues.rawPassword;
+
+  res.status(200).json({
+    status: "updated",
+    user: targetUser,
+  });
 });
+
 app.delete("/api/v1/users/:userId", (req, res) => {
   res.send(`IMPLEMENT: route to delete a user`);
 });
