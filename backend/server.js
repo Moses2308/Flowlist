@@ -1,99 +1,29 @@
 import express from "express";
 import sequelizeConn from "./config/dbConnection.js";
+const { Users, Lists, ListItems } = sequelizeConn.models;
+import {
+  getUserById,
+  getUsers,
+  postUser,
+  patchUser,
+  deleteUser,
+} from "./controllers/usersController.js";
 
 const PORT = process.env.PORT;
 
-const { Users, Lists, ListItems } = sequelizeConn.models;
 const app = express();
 
 app.use(express.json({ type: "application/json" }));
 
-app.post("/api/v1/users", async (req, res) => {
-  const { email, password } = req.body.fields;
+app.post("/api/v1/users", postUser);
 
-  const newUser = Users.build({
-    email,
-    rawPassword: password,
-  });
+app.get("/api/v1/users", getUsers);
 
-  try {
-    await newUser.save();
-  } catch (error) {
-    res.status(400).json({
-      msg: "error saving user to the database",
-      error: error.message,
-    });
-    return;
-  }
+app.get("/api/v1/users/:userId", getUserById);
 
-  delete newUser.dataValues.rawPassword;
-  delete newUser.dataValues.passwordHash;
+app.patch("/api/v1/users/:userId", patchUser);
 
-  res.status(200).json({
-    user: newUser,
-    action: "created",
-  });
-});
-
-app.get("/api/v1/users", async (req, res) => {
-  const users = await Users.findAll();
-  const sanitizedUsers = users.map((user) => {
-    delete user.dataValues.passwordHash;
-    return user;
-  });
-
-  res.status(200).json({
-    users: sanitizedUsers,
-  });
-});
-
-app.get("/api/v1/users/:userId", async (req, res) => {
-  const { userId } = req.params;
-
-  const targetUser = await Users.findByPk(userId);
-  delete targetUser.dataValues.passwordHash;
-
-  res.status(200).json({
-    user: targetUser,
-  });
-});
-
-app.patch("/api/v1/users/:userId", async (req, res) => {
-  const { userId } = req.params;
-  const { fields } = req.body;
-
-  const targetUser = await Users.findByPk(userId);
-
-  targetUser.patchFields(fields);
-
-  await targetUser.save();
-
-  delete targetUser.dataValues.passwordHash;
-  delete targetUser.dataValues.rawPassword;
-
-  res.status(200).json({
-    status: "updated",
-    user: targetUser,
-  });
-});
-
-app.delete("/api/v1/users/:userId", async (req, res) => {
-  const { password } = req.body.fields;
-  const { userId } = req.params;
-
-  const targetUser = await Users.findByPk(userId);
-
-  if (!(await targetUser.verifyPassword(password))) {
-    throw new Error("password does not match");
-  }
-
-  await targetUser.destroy();
-
-  res.status(200).json({
-    user: null,
-    status: "hardDeleted",
-  });
-});
+app.delete("/api/v1/users/:userId", deleteUser);
 
 //catch all error handler
 // app.use((req, res, next) => {
