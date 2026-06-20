@@ -10,9 +10,12 @@ export default function defineUsers(sequelizeConn) {
 
       for (const field of fields) {
         switch (field[0]) {
-          case "password":
-            this.passwordHash = await bcrypt.hash(field[1], 15);
-            fieldsUpdated.push(field[0]);
+          case "newPassword":
+            if (!(fieldsObj.password === fieldsObj.newPassword)) {
+              //^^ if the newpassword is not the same as the old password,
+              this.passwordHash = await bcrypt.hash(field[1], 15);
+              fieldsUpdated.push(field[0]);
+            }
             break;
           case "email":
             this.email = field[1];

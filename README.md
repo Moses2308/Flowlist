@@ -113,7 +113,8 @@ REQUEST BODY:
 {
     "fields":{
         "email" : "new@example.com",
-        "password": "newPassword"
+        "newPassword": "newPassword",
+        "password": "oldPassword"
     }
 }
 ```
