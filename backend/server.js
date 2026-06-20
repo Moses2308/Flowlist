@@ -8,22 +8,16 @@ import {
   patchUser,
   deleteUser,
 } from "./controllers/usersController.js";
+import usersRouter from "./routes/usersRoute.js";
 
 const PORT = process.env.PORT;
-
 const app = express();
 
+//REQUEST BODY PARSERS
 app.use(express.json({ type: "application/json" }));
 
-app.post("/api/v1/users", postUser);
-
-app.get("/api/v1/users", getUsers);
-
-app.get("/api/v1/users/:userId", getUserById);
-
-app.patch("/api/v1/users/:userId", patchUser);
-
-app.delete("/api/v1/users/:userId", deleteUser);
+//ROUTES
+app.use("/api/v1/users", usersRouter);
 
 //catch all error handler
 // app.use((req, res, next) => {
