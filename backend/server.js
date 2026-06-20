@@ -9,7 +9,6 @@ import {
   deleteUser,
 } from "./controllers/usersController.js";
 import usersRouter from "./routes/usersRoute.js";
-
 const PORT = process.env.PORT;
 const app = express();
 
@@ -19,15 +18,19 @@ app.use(express.json({ type: "application/json" }));
 //ROUTES
 app.use("/api/v1/users", usersRouter);
 
-//catch all error handler
-// app.use((req, res, next) => {
-//   const customError = new Error("Path not found");
-//   customError.status = 404;
-//   throw customError;
-// });
-// app.use("/", (error, req, res, next) => {
-//   res.status(error.status).send(error.message);
-// });
+//PATH NOT FOUND HANDLER
+app.use((req, res, next) => {
+  const customError = new Error("Route not found");
+  customError.status = 404;
+  throw customError;
+});
+
+//ERROR HANDLER
+app.use("/", (error, req, res, next) => {
+  res.status(error.status || 400).json({
+    error: error.message,
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
