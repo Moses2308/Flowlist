@@ -44,15 +44,14 @@ async function getUserById(req, res) {
 
 //FIX: passowrd is not checked on update
 //FIX: password not updating on model
+
 async function patchUser(req, res) {
   const { userId } = req.params;
   const { fields } = req.body;
 
   const targetUser = await Users.findByPk(userId);
 
-  targetUser.patchFields(fields);
-
-  console.log(targetUser.toJSON());
+  await targetUser.patchFields(fields);
 
   await targetUser.save();
 

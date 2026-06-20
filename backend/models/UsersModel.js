@@ -4,14 +4,14 @@ import bcrypt from "bcrypt";
 export default function defineUsers(sequelizeConn) {
   class Users extends Model {
     //instance method to update fields
-    patchFields(fieldsObj) {
+    async patchFields(fieldsObj) {
       const fields = Object.entries(fieldsObj);
       const fieldsUpdated = [];
 
-      fields.forEach((field) => {
+      for (const field of fields) {
         switch (field[0]) {
           case "password":
-            this.rawPassword = field[1];
+            this.passwordHash = await bcrypt.hash(field[1], 15);
             fieldsUpdated.push(field[0]);
             break;
           case "email":
@@ -21,7 +21,7 @@ export default function defineUsers(sequelizeConn) {
           default:
             break;
         }
-      });
+      }
 
       return fieldsUpdated;
     }
@@ -76,9 +76,9 @@ export default function defineUsers(sequelizeConn) {
       */
       hooks: {
         beforeValidate: async (user, options) => {
-          if (user.rawPassword) {
+          if (user.isNewRecord && user.rawPassword) {
             user.passwordHash = await bcrypt.hash(user.rawPassword, 15);
-            user.rawPassword = null;
+            delete user.dataValues.rawPassword;
           }
         },
       },
