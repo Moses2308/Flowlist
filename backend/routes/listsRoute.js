@@ -47,11 +47,27 @@ async function getLists(req, res) {
     lists,
   });
 }
+
 async function getListById(req, res) {
+  //get id from session /json temporarily
+  const { userId } = req.body.fields;
+
+  //get listId from path params
+  const { listId } = req.params;
+
+  //query for specific list where it belongs to the user
+  const targetList = await Lists.findOne({
+    where: {
+      userId,
+      id: listId,
+    },
+  });
+
   res.status(200).json({
-    msg: "inside getListbyId route",
+    list: targetList,
   });
 }
+
 async function patchList(req, res) {
   res.status(200).json({
     msg: "inside patchList route",

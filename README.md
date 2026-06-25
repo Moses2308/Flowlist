@@ -51,6 +51,8 @@ RESPONSE:
 
 ### GET
 
+TODO: IMPLEMENT SORTING
+
 ENDPOINT: `/users?"sort=value&limit=value&offset=value`
 
 **Request** no requirements
@@ -77,6 +79,8 @@ RESPONSE:
 ```
 
 ### GET
+
+TODO: IMPLEMENT EAGER LOADING
 
 ENDPOINT: `/users/:userId?include=lists,res`
 
@@ -194,6 +198,8 @@ RESPONSE:
 
 ENDPOINT: `/lists`
 
+TODO: IMPLEMENT EAGER LOADING
+
 **Request** no requirements
 
 **Response** includes all the `List` objects associated with the user.
@@ -209,5 +215,30 @@ RESPONSE:
 ```
 {
     "lists": [List1, List2, ...]
+}
+```
+
+### GET
+
+TODO: IMPLEMENT EAGER LOADING
+
+ENDPOINT: `/lists/:listId?include=listItems
+
+**Request** no requirements
+
+**Response** includes all the `List` objects associated with the user.
+
+REQUEST BODY:
+
+```
+
+```
+
+RESPONSE:
+
+```
+{
+    "list": List,
+    "listItems": [listItem1, listItem2, ...]
 }
 ```
