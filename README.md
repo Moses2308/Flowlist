@@ -2,10 +2,6 @@
 
 A app designed to support productivity by giving structure to habits and behavior.
 
-# Flowlist
-
-A app designed to support productivity by giving structure to habits and behavior.
-
 # BACKEND API ENDPOINTS
 
 The following API is used for connecting the front end to the backend.  
@@ -18,6 +14,8 @@ For example:
 const usersEndpoint = "flowlist/api/v1/users"
 const listsEndpont = "flowlist/api/v1/lists/:listId"
 ```
+
+---
 
 ## USERS
 
@@ -161,6 +159,8 @@ RESPONSE:
 }
 ```
 
+---
+
 ## Lists
 
 ### POST
@@ -242,3 +242,61 @@ RESPONSE:
     "listItems": [listItem1, listItem2, ...]
 }
 ```
+
+### PATCH
+
+//TODO: Validate User has access to list with SESSION info
+
+ENDPOINT: `/lists/:listId
+
+**Request** requires a `title` field in the request body
+
+**Response** includes the `List` object that was updated.
+
+REQUEST BODY:
+
+```
+{
+    "fields":{
+        "title": "new title"
+    }
+}
+```
+
+RESPONSE:
+
+```
+{
+    "list": List,
+    "listItems": [listItem1, listItem2, ...]
+}
+```
+
+### DELETE
+
+//TODO: Validate User has access to list with SESSION info
+
+ENDPOINT: `/lists/:listId
+
+**Request**
+
+**Response** includes the `List` object that was updated.
+
+REQUEST BODY:
+
+```
+{
+    "hardDelete": true || false
+}
+```
+
+RESPONSE:
+
+```
+{
+    "status": "hardDeleted" || "softDeleted",
+    "list": null
+}
+```
+
+---
