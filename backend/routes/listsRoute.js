@@ -1,6 +1,5 @@
 import express from "express";
 import sequelizeConn from "../config/dbConnection.js";
-import { where } from "sequelize";
 
 const { Users, Lists } = sequelizeConn.models;
 
@@ -58,8 +57,8 @@ async function getListById(req, res) {
   //query for specific list where it belongs to the user
   const targetList = await Lists.findOne({
     where: {
-      userId,
       id: listId,
+      userId,
     },
   });
 
@@ -69,13 +68,52 @@ async function getListById(req, res) {
 }
 
 async function patchList(req, res) {
+  //get the user id from session / json temporarily,
+  const { userId } = req.body.fields;
+
+  //get the fields to update from request body
+  const { title } = req.body.fields;
+
+  //get the list id from param
+  const { listId } = req.params;
+  //do a update query
+
+  const targetList = await Lists.findOne({
+    where: {
+      id: listId,
+      userId,
+    },
+  });
+
+  targetList.title = title;
+
+  const updatedList = await targetList.save();
+
+  //respond with the updated list
   res.status(200).json({
-    msg: "inside patchList route",
+    status: "updated",
+    list: updatedList,
   });
 }
+
 async function deleteList(req, res) {
+  //get the user id from session / json temporarily,
+  const { userId } = req.body.fields;
+  //get the list  id from path param
+  const { listId } = req.params;
+  //do a soft deletion or hard deletion based on json request body
+  const { hardDelete } = req.body;
+
+  await Lists.destroy({
+    where: {
+      id: listId,
+      userId,
+    },
+  });
+
   res.status(200).json({
-    msg: "inside deleteList route",
+    status: "hardDeleted",
+    list: null,
   });
 }
 
