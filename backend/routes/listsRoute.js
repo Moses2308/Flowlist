@@ -1,5 +1,6 @@
 import express from "express";
 import sequelizeConn from "../config/dbConnection.js";
+import { where } from "sequelize";
 
 const { Users, Lists } = sequelizeConn.models;
 
@@ -29,9 +30,21 @@ async function postList(req, res) {
     list: newList,
   });
 }
+
+//TODO: GET ALL LISTS RELATED TO THE USER
 async function getLists(req, res) {
+  //get id from session /json temporarily
+  const { userId } = req.body.fields;
+
+  //get all lists associated with the user
+  const lists = await Lists.findAll({
+    where: {
+      userId,
+    },
+  });
+
   res.status(200).json({
-    msg: "inside getLists route",
+    lists,
   });
 }
 async function getListById(req, res) {

@@ -53,6 +53,8 @@ RESPONSE:
 
 ENDPOINT: `/users?"sort=value&limit=value&offset=value`
 
+**Request** no requirements
+
 **Response** includes all `users` in a database.  
 Optionally includes `currentOffset` as a query param.
 
@@ -152,5 +154,60 @@ RESPONSE:
 {
     "user": User,
     "status": "hardDeleted"
+}
+```
+
+## Lists
+
+### POST
+
+ENDPOINT: `/lists`
+
+**Request** requires an `title` field in the request body.
+
+> Can define the list as a checklist or a plain list by passing `isChecklist`
+> by default, it is false.
+
+**Response** includes the `status` indicating the result of operation and the `List` if successfully created.
+
+REQUEST BODY:
+
+```
+{
+    fields: {
+        "title": "My List Name"
+        "isChecklist": true
+    }
+}
+```
+
+RESPONSE:
+
+```
+{
+    "status": "created",
+    "list": List
+}
+```
+
+### GET
+
+ENDPOINT: `/lists`
+
+**Request** no requirements
+
+**Response** includes all the `List` objects associated with the user.
+
+REQUEST BODY:
+
+```
+
+```
+
+RESPONSE:
+
+```
+{
+    "lists": [List1, List2, ...]
 }
 ```
