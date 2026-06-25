@@ -9,6 +9,8 @@ import {
   deleteUser,
 } from "./controllers/usersController.js";
 import usersRouter from "./routes/usersRoute.js";
+import listsRouter from "./routes/listsRoute.js";
+
 const PORT = process.env.PORT;
 const app = express();
 
@@ -17,6 +19,7 @@ app.use(express.json({ type: "application/json" }));
 
 //ROUTES
 app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/lists", listsRouter);
 
 //PATH NOT FOUND HANDLER
 app.use((req, res, next) => {
