@@ -12,6 +12,7 @@ export default function defineAssociations(sequelizeConn) {
     },
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
+    as: "list",
   });
   //LISTS ASSOCIATIONS
   Lists.belongsTo(Users, {
@@ -22,6 +23,7 @@ export default function defineAssociations(sequelizeConn) {
     },
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
+    as: "user",
   });
   Lists.hasMany(ListItems, {
     foreignKey: {
@@ -31,6 +33,7 @@ export default function defineAssociations(sequelizeConn) {
     },
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
+    as: "listItem",
   });
 
   //ITEMS ASSOCIATIONS
@@ -42,5 +45,6 @@ export default function defineAssociations(sequelizeConn) {
     },
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
+    as: "list",
   });
 }
