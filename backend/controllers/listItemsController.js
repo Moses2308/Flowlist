@@ -1,7 +1,7 @@
 import sequelizeConn from "../config/dbConnection.js";
 const { Lists, ListItems } = sequelizeConn.models;
 
-//TODO: FIND THE LIST BASED ON PARAM AND USERID && ASSOCIATE NEW LIST ITEM TO IT
+//TODO: REDEFINE USERID WITH SESSIONS
 async function postListItem(req, res) {
   //LIST THAT WILL BE APPENDED TO
   const { listId } = req.params;
@@ -33,4 +33,26 @@ async function postListItem(req, res) {
   });
 }
 
-export { postListItem };
+//TODO: GET ALL THE LIST ITEMS ASSOCIATED WITH THE LIST
+async function getListItems(req, res) {
+  // THE LISTID THE ITEMS BELONG TO
+  const { listId } = req.params;
+  // THE USER THE LIST SHOULD BELONG TO
+  const userId = process.env.USER_ID;
+
+  const targetList = await Lists.findOne({
+    where: {
+      id: listId,
+      userId,
+    },
+    include: "listItem",
+  });
+
+  const listItems = targetList.listItem;
+
+  res.status(200).json({
+    listItems,
+  });
+}
+
+export { postListItem, getListItems };
