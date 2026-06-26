@@ -12,7 +12,7 @@ const { DBUSERNAME, DBPASSWORD, DBHOST, DBDIALECT } = process.env;
 //CONNECTION DEFINITION
 const sequelizeConn = new Sequelize("flowlist", DBUSERNAME, DBPASSWORD, {
   host: DBHOST,
-  dialect: "mysql",
+  dialect: DBDIALECT,
 });
 
 //MODEL DEFINITIONS
