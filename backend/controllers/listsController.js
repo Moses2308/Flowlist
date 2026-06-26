@@ -4,7 +4,7 @@ const { Users, Lists } = sequelizeConn.models;
 
 async function postList(req, res) {
   //get userId from session / json for now
-  const { userId } = req.body.fields;
+  const userId = process.env.USER_ID;
 
   //get title value and checklist value from request body
   const { title, isChecklist } = req.body.fields;
@@ -21,7 +21,7 @@ async function postList(req, res) {
 
 async function getLists(req, res) {
   //get id from session /json temporarily
-  const { userId } = req.body.fields;
+  const userId = process.env.USER_ID;
 
   //get all lists associated with the user
   const lists = await Lists.findAll({
@@ -37,7 +37,7 @@ async function getLists(req, res) {
 
 async function getListById(req, res) {
   //get id from session /json temporarily
-  const { userId } = req.body.fields;
+  const userId = process.env.USER_ID;
 
   //get listId from path params
   const { listId } = req.params;
@@ -57,7 +57,7 @@ async function getListById(req, res) {
 
 async function patchList(req, res) {
   //get the user id from session / json temporarily,
-  const { userId } = req.body.fields;
+  const userId = process.env.USER_ID;
 
   //get the fields to update from request body
   const { title } = req.body.fields;
@@ -86,7 +86,7 @@ async function patchList(req, res) {
 
 async function deleteList(req, res) {
   //get the user id from session / json temporarily,
-  const { userId } = req.body.fields;
+  const userId = process.env.USER_ID;
   //get the list  id from path param
   const { listId } = req.params;
   //do a soft deletion or hard deletion based on json request body
