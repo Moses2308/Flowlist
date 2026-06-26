@@ -85,4 +85,30 @@ async function patchListItem(req, res) {
   });
 }
 
-export { postListItem, getListItems, patchListItem };
+async function deleteListItem(req, res) {
+  const { listId, listItemId } = req.params;
+  const userId = process.env.USER_ID;
+  //destructuring and handling if hard delete is null
+  const { hardDelete } = req.body.hardDelete
+    ? { hardDelete: true }
+    : { hardDelete: false };
+
+  const targetListItem = await ListItems.findByPk(listItemId, {
+    include: "list",
+  });
+
+  if (targetListItem.list.userId !== userId) {
+    const customError = new Error("You are not the owner of this ListItem");
+    customError.status(400);
+    throw customError;
+  }
+
+  targetListItem.destroy({ force: hardDelete });
+
+  res.status(200).json({
+    status: hardDelete ? "hardDeleted" : "softDeleted",
+    listItem: null,
+  });
+}
+
+export { postListItem, getListItems, patchListItem, deleteListItem };
