@@ -7,6 +7,7 @@ import {
   patchList,
   deleteList,
 } from "../controllers/listsController.js";
+import listItemsRouter from "./listItemsRoute.js";
 
 const { Users, Lists } = sequelizeConn.models;
 
@@ -17,5 +18,7 @@ listsRouter.get("/", getLists);
 listsRouter.get("/:listId", getListById);
 listsRouter.patch("/:listId", patchList);
 listsRouter.delete("/:listId", deleteList);
+
+listsRouter.use("/:listId/listItems", listItemsRouter);
 
 export default listsRouter;
