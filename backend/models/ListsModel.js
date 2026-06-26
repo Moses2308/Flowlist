@@ -15,6 +15,8 @@ export default function defineLists(sequelizeConn) {
       },
       isChecklist: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        allowNull: false,
       },
     },
     {
