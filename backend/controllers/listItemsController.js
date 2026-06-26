@@ -55,4 +55,34 @@ async function getListItems(req, res) {
   });
 }
 
-export { postListItem, getListItems };
+async function patchListItem(req, res) {
+  const { listId, listItemId } = req.params;
+  const userId = process.env.USER_ID;
+  const { title, isChecked } = req.body.fields;
+
+  const targetList = await Lists.findOne({
+    where: {
+      id: listId,
+      userId,
+    },
+    include: "listItem",
+  });
+
+  let targetListItem;
+  for (const item of targetList.listItem) {
+    if (item.id === listItemId) {
+      targetListItem = item;
+      break;
+    }
+  }
+  targetListItem.title = title;
+  targetListItem.isChecked = isChecked;
+  targetListItem.save();
+
+  res.status(200).json({
+    status: "updated",
+    targetListItem,
+  });
+}
+
+export { postListItem, getListItems, patchListItem };
