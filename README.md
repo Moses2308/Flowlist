@@ -247,7 +247,7 @@ RESPONSE:
 
 //TODO: Validate User has access to list with SESSION info
 
-ENDPOINT: `/lists/:listId
+ENDPOINT: `/lists/:listId`
 
 **Request** requires a `title` field in the request body
 
@@ -276,9 +276,9 @@ RESPONSE:
 
 //TODO: Validate User has access to list with SESSION info
 
-ENDPOINT: `/lists/:listId
+ENDPOINT: `/lists/:listId`
 
-**Request**
+**Request** no required fields
 
 **Response** includes the `List` object that was updated.
 
@@ -300,3 +300,131 @@ RESPONSE:
 ```
 
 ---
+
+## ListItems
+
+### POST
+
+ENDPOINT: `/lists/:listId/listItems`
+
+**Request** requires a title for the new listItem
+
+**Response** includes the `ListItem` object that was created.
+
+REQUEST BODY:
+
+```
+{
+    "fields":{
+        "title": "new title"
+    }
+}
+```
+
+RESPONSE:
+
+```
+{
+    "status": "created",
+    "listItem": ListItem
+}
+```
+
+### GET
+
+ENDPOINT: `/lists/:listId/listItems`
+
+**Request** no required fields
+
+**Response** includes all `ListItems` objects that belong to the user.
+
+REQUEST BODY:
+
+```
+
+```
+
+RESPONSE:
+
+```
+{
+    "listItems": [ListItem1, ListItem2, ...]
+}
+```
+
+### GET
+
+//not implemented
+
+ENDPOINT: `/lists/:listId/listItems/:listItemId`
+
+**Request** no required fields
+
+**Response** includes a `ListItem` corresponding to the :listItemId
+
+REQUEST BODY:
+
+```
+
+```
+
+RESPONSE:
+
+```
+{
+    "listItem": ListItem
+}
+```
+
+### PATCH
+
+ENDPOINT: `/lists/:listId/listItems/:listItemId`
+
+**Request** accepts an fields to modify the title or isChecked fields of the record.
+
+**Response** includes a `ListItem` object corresponding to the :listItemId and the status.
+
+REQUEST BODY:
+
+```
+{
+    "fields": {
+        "title": "new title",
+        "isChecked": false
+    }
+}
+```
+
+RESPONSE:
+
+```
+{
+    "status": "updated",
+    "listItem": ListItem
+}
+```
+
+### DELETE
+
+ENDPOINT: `/lists/:listId/listItems/:listItemId`
+
+**Request** accepts a boolean "hardDelete" option to determine whether to perform a soft delete or a hard delete
+
+**Response** includes the type of deletion, and null
+
+REQUEST BODY:
+
+```
+{
+    "hardDelete": true,
+}
+```
+
+RESPONSE:
+
+```
+{
+    "status": "hardDeleted" || "softDeleted"
+    "listItem": null
+}
+```
