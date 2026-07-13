@@ -1,7 +1,18 @@
-import "./App.css";
+import { useEffect, useState } from "react";
+import "../stylesheets/style.css";
+import Navbar from "./components/Navbar.jsx";
 
 function App() {
-  return <h1>Hello world</h1>;
+  const [isAuthenticated, setAuth] = useState(false);
+  return (
+    <>
+      <header>
+        <Navbar isAuthenticated={isAuthenticated} />
+      </header>
+      <main></main>
+      <footer></footer>
+    </>
+  );
 }
 
 export default App;

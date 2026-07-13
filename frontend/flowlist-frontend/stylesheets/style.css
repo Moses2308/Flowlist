@@ -1,0 +1,66 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+
+  --color-text: white;
+  --spacing-gutter-small: 2rem;
+}
+#root {
+  min-height: 150vh;
+  /* background: url("../src/assets/monica-flores-gZk0fJSlETY-unsplash.jpg");
+  background-position-x: center;
+  background-position-y: center;
+  background-size: cover; */
+}
+.navbar {
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: var(--color-text);
+  width: 100%;
+  position: fixed;
+
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.navbar_face {
+  min-height: 6rem;
+  padding: 0rem 2rem;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar_face img {
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.navbar_pages {
+  min-height: calc(100vh - 6rem);
+}
+
+.navbar_pages ul {
+  list-style-type: none;
+  text-align: right;
+  padding: 0 0 0 0;
+}
+.navbar_pages a {
+  display: block;
+  padding: 1rem 2rem;
+}
+
+.navbar_pages a:hover {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
