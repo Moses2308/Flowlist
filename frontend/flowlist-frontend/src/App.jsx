@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../stylesheets/style.css";
 import Navbar from "./components/Navbar.jsx";
+import Hero from "./components/Hero.jsx";
 
 function App() {
   const [isAuthenticated, setAuth] = useState(false);
@@ -9,7 +10,9 @@ function App() {
       <header>
         <Navbar isAuthenticated={isAuthenticated} />
       </header>
-      <main></main>
+      <main>
+        <Hero />
+      </main>
       <footer></footer>
     </>
   );

@@ -8,7 +8,7 @@ function Navbar({ isAuthenticated }) {
     console.log("clicked");
   }
   return (
-    <nav className="navbar">
+    <nav className="navbar glass-back">
       <div className="navbar_face">
         <a href="">Flowlist</a>
         <img src={hamburgerIcon} alt="" onClick={clickHandler} />

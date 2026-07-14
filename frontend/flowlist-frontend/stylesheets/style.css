@@ -1,5 +1,5 @@
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Times New Roman", Arial, Helvetica, sans-serif;
   color: var(--color-text);
 
   --color-text: white;
@@ -12,18 +12,24 @@
   background-position-y: center;
   background-size: cover; */
 }
+
+.glass-back {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 .navbar {
   font-size: 2rem;
   text-transform: uppercase;
   color: var(--color-text);
   width: 100%;
   position: fixed;
-
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .navbar a {
@@ -64,3 +70,44 @@
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
+
+/*STYLES FOR HERO SECTION */
+
+.hero {
+  background:
+    linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%),
+    url("../src/assets/monica-flores-gZk0fJSlETY-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+
+  min-height: 100vh;
+
+  text-transform: uppercase;
+  text-align: center;
+
+  display: grid;
+  place-items: center;
+}
+
+.hero_content {
+  padding: 0 var(--spacing-gutter-small);
+  transform: translateY(2rem);
+}
+
+.hero_content p {
+  font-size: 3rem;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.linkButton {
+  text-decoration: none;
+  color: var(--color-text);
+  margin: auto;
+  width: fit-content;
+  padding: 1rem 3rem;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+/* STYLES FOR FEATURE SECTIONS */
