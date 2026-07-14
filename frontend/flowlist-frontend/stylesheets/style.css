@@ -7,10 +7,10 @@
 }
 #root {
   min-height: 150vh;
-  /* background: url("../src/assets/monica-flores-gZk0fJSlETY-unsplash.jpg");
+  background: url("../src/assets/monica-flores-gZk0fJSlETY-unsplash.jpg");
   background-position-x: center;
   background-position-y: center;
-  background-size: cover; */
+  background-size: cover;
 }
 
 .glass-back {
@@ -74,9 +74,11 @@
 /*STYLES FOR HERO SECTION */
 
 .hero {
-  background:
-    linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(255, 255, 255, 0) 100%),
-    url("../src/assets/monica-flores-gZk0fJSlETY-unsplash.jpg");
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
   background-size: cover;
   background-position: center;
 
@@ -111,3 +113,36 @@
 }
 
 /* STYLES FOR FEATURE SECTIONS */
+.feature {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.feature_text-content {
+  padding: 3rem var(--spacing-gutter-small);
+}
+
+.feature_text-content h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+}
+
+.feature_text-content p {
+  font-size: 1.25;
+}
+
+.feature_img-wrapper {
+  position: relative;
+}
+
+.feature img {
+  height: 50vh;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  mask-image: linear-gradient(transparent 10%, black 50%);
+}
+
+.footer {
+  min-height: 4rem;
+  background: rgba(0, 0, 0, 0.7);
+}
