@@ -17,8 +17,7 @@
 
 .glass-back {
   background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
+  box-shadow: inset 0px 0px 10px 1px rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -146,4 +145,81 @@
 .footer {
   min-height: 4rem;
   background: rgba(0, 0, 0, 0.7);
+}
+
+/* STYLES FOR FORMS */
+
+.form-container {
+  height: calc(100vh - 6rem);
+  padding-top: 4rem;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.form-container h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+}
+.form-container a {
+  color: inherit;
+  display: block;
+  text-align: center;
+}
+
+.auth-form {
+  min-width: 12rem;
+  max-width: 50%;
+  margin: 2rem auto 0 auto;
+  display: grid;
+  row-gap: 1rem;
+}
+
+.auth-form label {
+  display: block;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"] {
+  display: block;
+  background: none;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  color: white;
+  transition: background 0.1s ease-out;
+}
+
+.auth-form input[type="email"]:hover,
+.auth-form input[type="password"]:hover,
+.auth-form input[type="submit"]:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.auth-form label[for="remember"] {
+}
+
+.auth-form input[type="submit"] {
+  display: block;
+  margin: auto;
+  border-style: none;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  color: inherit;
+  padding: 1rem 3rem;
+  cursor: pointer;
+
+  transition: background 0.1s ease-out;
+}
+
+.single-check-inputs label {
+  display: inline;
+  font-size: 1rem;
+  margin-left: 0.75rem;
 }
