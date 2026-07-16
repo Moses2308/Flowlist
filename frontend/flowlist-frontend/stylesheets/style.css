@@ -6,11 +6,13 @@
   --spacing-gutter-small: 2rem;
 }
 #root {
-  min-height: 150vh;
+  min-height: 100vh;
   background: url("../src/assets/monica-flores-gZk0fJSlETY-unsplash.jpg");
   background-position-x: center;
   background-position-y: center;
   background-size: cover;
+
+  padding-top: 6rem;
 }
 
 .glass-back {
@@ -82,7 +84,7 @@
   background-size: cover;
   background-position: center;
 
-  min-height: 100vh;
+  min-height: calc(100vh - 6rem);
 
   text-transform: uppercase;
   text-align: center;
@@ -93,7 +95,6 @@
 
 .hero_content {
   padding: 0 var(--spacing-gutter-small);
-  transform: translateY(2rem);
 }
 
 .hero_content p {
