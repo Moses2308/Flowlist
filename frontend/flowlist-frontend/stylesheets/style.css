@@ -202,9 +202,6 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.auth-form label[for="remember"] {
-}
-
 .auth-form input[type="submit"] {
   display: block;
   margin: auto;
