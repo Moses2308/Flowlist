@@ -7,14 +7,14 @@ import listFeatureImage from "../assets/jakub-zerdzicki-fXlL5I0IvK0-unsplash.jpg
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
       <section className="features">
         {features.map((feature) => (
           <Feature {...feature} key={feature.id} />
         ))}
       </section>
-    </main>
+    </>
   );
 }
 

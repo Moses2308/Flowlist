@@ -2,7 +2,7 @@ import AuthForm from "../components/AuthForm.jsx";
 
 export default function RegisterPage() {
   return (
-    <main>
+    <>
       <section className="form-container glass-back">
         <h1>Register</h1>
         <div>
@@ -10,6 +10,6 @@ export default function RegisterPage() {
         </div>
         <AuthForm type="register" />
       </section>
-    </main>
+    </>
   );
 }
