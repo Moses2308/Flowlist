@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router";
 import hamburgerIcon from "../assets/hamburger.svg";
 
 function Navbar({ isAuthenticated }) {
@@ -10,7 +11,7 @@ function Navbar({ isAuthenticated }) {
   return (
     <nav className="navbar glass-back">
       <div className="navbar_face">
-        <a href="">Flowlist</a>
+        <Link to="/home">Flowlist</Link>
         <img src={hamburgerIcon} alt="" onClick={clickHandler} />
       </div>
       {!isExpanded || <NavbarPages isAuthenticated={isAuthenticated} />}
@@ -21,12 +22,12 @@ function Navbar({ isAuthenticated }) {
 function NavbarPages({ isAuthenticated }) {
   const loginLink = (
     <li>
-      <a href="">login</a>
+      <NavLink to="/login">login</NavLink>
     </li>
   );
   const logoutLink = (
     <li>
-      <a href="">logout</a>
+      <NavLink to="/logout">logout</NavLink>
     </li>
   );
 
@@ -34,16 +35,16 @@ function NavbarPages({ isAuthenticated }) {
     <div className="navbar_pages">
       <ul>
         <li>
-          <a href="">Dashboard</a>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
-          <a href="">Habits</a>
+          <NavLink to="/habits">Habits</NavLink>
         </li>
         <li>
-          <a href="">Tasks</a>
+          <NavLink to="/tasks">Tasks</NavLink>
         </li>
         <li>
-          <a href="">Lists</a>
+          <NavLink to="/lists">Lists</NavLink>
         </li>
 
         {isAuthenticated ? logoutLink : loginLink}
