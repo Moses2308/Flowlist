@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import AuthForm from "../components/AuthForm.jsx";
 
 export default function LoginPage() {
@@ -6,7 +7,7 @@ export default function LoginPage() {
       <section className="form-container glass-back">
         <h1>Login</h1>
         <div>
-          <a href="">or register</a>
+          <NavLink to="/register">or register</NavLink>
         </div>
         <AuthForm type="login" />
       </section>

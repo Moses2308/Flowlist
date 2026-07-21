@@ -1,11 +1,13 @@
+import { Link, NavLink } from "react-router";
+
 export default function Hero() {
   return (
     <section className="hero">
       <div className="hero_content">
         <p>you are what you [repeat]</p>
-        <a href="" className="linkButton glass-back">
+        <NavLink to="/register" className="linkButton glass-back">
           register
-        </a>
+        </NavLink>
       </div>
     </section>
   );
