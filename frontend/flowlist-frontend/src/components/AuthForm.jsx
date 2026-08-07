@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Form } from "react-router";
 
-export default function AuthForm({ submitHandler, type }) {
+export default function AuthForm({ type }) {
   //hooks
   const [formState, setFormState] = useState({
     email: "",
@@ -73,9 +74,11 @@ export default function AuthForm({ submitHandler, type }) {
       </div>
     </>
   );
+
+  const path = type === "register" ? "/register" : "/login";
   //RETURNED JSX
   return (
-    <form className="auth-form" onSubmit={submitHandler}>
+    <Form className="auth-form" method="POST" action={path}>
       <div className="input-group">
         <label htmlFor="email">email</label>
         <input
@@ -115,7 +118,7 @@ export default function AuthForm({ submitHandler, type }) {
       </div>
 
       <input className="glass-back" type="submit" value="Submit" />
-    </form>
+    </Form>
   );
 }
 
